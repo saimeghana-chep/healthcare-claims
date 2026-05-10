@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClaimsOps Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand">
+          <div class="brand-mark">CO</div>
+          <div>
+            <p>ClaimsOps</p>
+            <span>Healthcare workflow</span>
+          </div>
+        </div>
+        <nav>
+          <button class="nav-item active" type="button">Dashboard</button>
+          <button class="nav-item" type="button">Claims Intake</button>
+          <button class="nav-item" type="button">Eligibility</button>
+          <button class="nav-item" type="button">Adjudication</button>
+          <button class="nav-item" type="button">Audit Center</button>
+          <button class="nav-item" type="button">FHIR APIs</button>
+        </nav>
+        <section class="system-card">
+          <p class="eyebrow">Environment</p>
+          <strong>.NET 8 Microservices</strong>
+          <span>Azure APIM, Kafka, SQL Server, Redis, Key Vault</span>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Blue Cross Blue Shield style prototype</p>
+            <h1>Claims processing command center</h1>
+          </div>
+          <div class="header-actions">
+            <button type="button">Export report</button>
+            <button class="primary" type="button">New claim</button>
+          </div>
+        </header>
+
+        <section class="metrics" aria-label="Claims metrics">
+          <article>
+            <span>Claims today</span>
+            <strong>12,486</strong>
+            <small>+8.4% from yesterday</small>
+          </article>
+          <article>
+            <span>Auto adjudicated</span>
+            <strong>76.2%</strong>
+            <small>35% lower average API latency</small>
+          </article>
+          <article>
+            <span>Eligibility match</span>
+            <strong>98.1%</strong>
+            <small>FHIR R4 + 270/271 validation</small>
+          </article>
+          <article>
+            <span>Exception queue</span>
+            <strong>327</strong>
+            <small>PHI-safe reviewer workflow</small>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel claims-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Live worklist</p>
+                <h2>Claims requiring attention</h2>
+              </div>
+              <label>
+                <span>Filter</span>
+                <select id="claimFilter">
+                  <option value="all">All claims</option>
+                  <option value="blocked">Blocked</option>
+                  <option value="review">Review</option>
+                  <option value="ready">Ready</option>
+                </select>
+              </label>
+            </div>
+            <div class="claims-table" role="table" aria-label="Claims requiring attention">
+              <div class="table-row table-head" role="row">
+                <span>Claim</span>
+                <span>Member</span>
+                <span>Type</span>
+                <span>Status</span>
+                <span>SLA</span>
+              </div>
+              <button class="table-row claim-row selected" type="button" data-status="review" data-claim="CLM-20491" role="row">
+                <span>CLM-20491</span>
+                <span>M. Carter</span>
+                <span>Medical</span>
+                <span><mark class="badge review">Review</mark></span>
+                <span>2h 12m</span>
+              </button>
+              <button class="table-row claim-row" type="button" data-status="blocked" data-claim="CLM-20477" role="row">
+                <span>CLM-20477</span>
+                <span>A. Shah</span>
+                <span>Dental</span>
+                <span><mark class="badge blocked">Blocked</mark></span>
+                <span>45m</span>
+              </button>
+              <button class="table-row claim-row" type="button" data-status="ready" data-claim="CLM-20461" role="row">
+                <span>CLM-20461</span>
+                <span>J. Wilson</span>
+                <span>Pharmacy</span>
+                <span><mark class="badge ready">Ready</mark></span>
+                <span>6h 04m</span>
+              </button>
+              <button class="table-row claim-row" type="button" data-status="review" data-claim="CLM-20440" role="row">
+                <span>CLM-20440</span>
+                <span>L. Nguyen</span>
+                <span>Medical</span>
+                <span><mark class="badge review">Review</mark></span>
+                <span>3h 31m</span>
+              </button>
+            </div>
+          </article>
+
+          <article class="panel detail-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Selected claim</p>
+                <h2 id="selectedClaim">CLM-20491</h2>
+              </div>
+              <mark class="badge review" id="selectedStatus">Review</mark>
+            </div>
+            <dl class="claim-facts">
+              <div>
+                <dt>EDI source</dt>
+                <dd>837 Professional</dd>
+              </div>
+              <div>
+                <dt>FHIR resources</dt>
+                <dd>Claim, Coverage, ExplanationOfBenefit</dd>
+              </div>
+              <div>
+                <dt>Risk flags</dt>
+                <dd>Duplicate procedure, modifier mismatch</dd>
+              </div>
+            </dl>
+            <div class="timeline" aria-label="Claim processing timeline">
+              <div class="step done">
+                <strong>Intake normalized</strong>
+                <span>X12 transformed into canonical claim model</span>
+              </div>
+              <div class="step done">
+                <strong>Eligibility verified</strong>
+                <span>270/271 coverage returned active</span>
+              </div>
+              <div class="step active">
+                <strong>Adjudication review</strong>
+                <span>Policy rule requires reviewer confirmation</span>
+              </div>
+              <div class="step">
+                <strong>835 payment advice</strong>
+                <span>Queued after approval</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel workflow-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Event-driven pipeline</p>
+                <h2>Kafka processing health</h2>
+              </div>
+            </div>
+            <div class="pipeline">
+              <div><span>Intake API</span><strong>99.99%</strong></div>
+              <div><span>FHIR Mapper</span><strong>42 ms</strong></div>
+              <div><span>Rules Engine</span><strong>18k/min</strong></div>
+              <div><span>Audit Writer</span><strong>0 DLQ</strong></div>
+            </div>
+          </article>
+
+          <article class="panel ai-panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">AI audit assist</p>
+                <h2>PHI-safe reviewer summary</h2>
+              </div>
+              <button type="button" id="summarizeButton">Refresh</button>
+            </div>
+            <p id="summaryText">
+              Claim CLM-20491 passed eligibility and intake validation. Reviewer should verify the duplicate procedure flag and confirm modifier alignment before payment advice generation.
+            </p>
+            <form class="note-form">
+              <label for="reviewNote">Reviewer note</label>
+              <textarea id="reviewNote" rows="4" placeholder="Add audit note"></textarea>
+              <button class="primary" type="button">Save note</button>
+            </form>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
