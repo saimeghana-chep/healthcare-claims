@@ -4,23 +4,13 @@ This repository contains a front-end prototype for a healthcare claims processin
 
 Live demo: https://saimeghana-chep.github.io/healthcare-claims/
 
-## Demo Video
+## Recorded Demo
 
-Add a short walkthrough video or GIF here so visitors can understand the project without opening the live site.
+<video src="./assets/healthcare-claims-demo.mp4" controls width="100%">
+  Your browser does not support the video tag.
+</video>
 
-Recommended file path:
-
-```text
-assets/healthcare-claims-demo.mp4
-```
-
-After uploading the video to this repository, update this section with:
-
-```html
-<video src="./assets/healthcare-claims-demo.mp4" controls width="100%"></video>
-```
-
-If GitHub does not render the video inline, upload the video to the repository issue/PR comment area or GitHub release assets, then paste the generated GitHub asset link here.
+The recorded walkthrough shows the claims dashboard, status filtering, selected claim details, processing timeline, Kafka pipeline health, and PHI-safe audit summary workflow.
 
 ## Project Overview
 
