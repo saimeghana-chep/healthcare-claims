@@ -1,16 +1,8 @@
 # Healthcare Claims Processing Prototype
 
-This repository contains a front-end prototype for a healthcare claims processing command center. The project is based on an enterprise claims workflow involving claims intake, member eligibility verification, adjudication review, audit tracking, reporting, and AI-assisted reviewer summaries.
+This is a front-end prototype for a healthcare claims processing command center. The project is based on an enterprise claims workflow involving claims intake, member eligibility verification, adjudication review, audit tracking, reporting, and AI-assisted reviewer summaries.
 
 Live demo: https://saimeghana-chep.github.io/healthcare-claims/
-
-## Recorded Demo
-
-<video src="./assets/healthcare-claims-demo.mp4" controls width="100%">
-  Your browser does not support the video tag.
-</video>
-
-The recorded walkthrough shows the claims dashboard, status filtering, selected claim details, processing timeline, Kafka pipeline health, and PHI-safe audit summary workflow.
 
 ## Project Overview
 
